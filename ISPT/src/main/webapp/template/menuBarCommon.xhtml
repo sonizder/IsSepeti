@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>TODO supply a title</title>
+        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
+        <style type="text/css">
+            .ui-menu-list   {background-color: #d6d6d6 !important;}  
+            .ui-panel {
+                border-radius: 0px 0px 0px 0px !important;
+                border: 0px solid #A8A8A8;
+            }
+            .ui-panel .ui-panel-content {
+                padding: 0px !important;
+            }
+        </style>
+    </h:head>
+
+        <h:body style="margin: 0"> 
+            <h:form>
+                <p:panel style="background: #2d2d2d; color: white; max-height: 20px; min-height: 20px;">
+                </p:panel>
+                <p:separator id="separator" style="border-color: #c31212; padding: 0px; margin: 0px;"/>
+            </h:form>
+
+            <h:form>  
+                
+
+                <p:menubar>  
+
+                    <p:menuitem value="Ana Sayfa" id="ana" ajax="false"   url="#" icon="ui-icon-home" style="margin-left: 150px"/> 
+
+                    <p:menuitem value="İlan Ver"           ajax="false"  url="#" icon="ui-icon-script" style="padding-left: 15px;"/> 
+
+                    <p:menuitem value="İlan Ara"           ajax="false" url="#"  icon="ui-icon-circle-zoomin" style="padding-left: 15px;" /> 
+
+                    <p:menuitem  value="Giriş"   onclick="dlg.show()"           ajax="false" url="#"  icon="ui-icon-person" style="position: absolute; right: 95px;" />
+
+                    <p:menuitem value="Kaydol"             ajax="false" url="index.jsp" icon="ui-icon-key" style="position: absolute; right: 15px;" /> 
+
+                </p:menubar>  
+                <p:menubar style="height: 20px; padding-bottom: 10px" autoDisplay="false">  
+                    //same content as default menubar  
+                </p:menubar>  
+            </h:form>  
+
+            <p:growl id="growl" showDetail="true" life="3000" /> 
+
+            <p:dialog id="dialog" header="Login" widgetVar="dlg">  
+                <h:form>  
+
+                    <h:panelGrid columns="2" cellpadding="5">  
+                        <h:outputLabel for="username" value="Username:" />  
+                        <p:inputText value="#{loginControll.username}"   
+                                     id="username" required="true" label="username" />  
+
+                        <h:outputLabel for="password" value="Password:" />  
+                        <h:inputSecret value="#{loginControll.password}"   
+                                       id="password" required="true" label="password" />  
+
+                        <f:facet name="footer">  
+                            <p:commandButton id="loginButton" value="Login" update=":growl"   
+                                             actionListener="#{loginControll.controll}"  
+                                             oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                        </f:facet>  
+                    </h:panelGrid>  
+
+                </h:form>  
+            </p:dialog>  
+
+            <script type="text/javascript">  
+                function handleLoginRequest(xhr, status, args) {  
+                    if(args.validationFailed || !args.loggedIn) {  
+                        jQuery('#dialog').effect("shake", { times:3 }, 100);                   
+                    } else {  
+                        dlg.hide(); 
+                    }  
+                }  
+            </script>
+
+
+        </h:body>
+
+</ui:composition>

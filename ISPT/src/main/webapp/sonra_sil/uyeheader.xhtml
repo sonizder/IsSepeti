@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
+
+        <style type="text/css">
+            .ui-menu-list   {background-color: #d6d6d6 !important;}  
+            .menubar {width: 90% !important; margin:auto !important;}
+
+        </style>
+    </h:head>
+    
+    <h:body> 
+        <h:form>
+            <p:menubar model="#{uyeMenuModelBean.model}" /> 
+        </h:form>        
+        
+        <h:form>
+            <p:commandButton id="log" value="çık"   
+                           
+                                     /> 
+        </h:form>
+    </h:body>
+</ui:composition>

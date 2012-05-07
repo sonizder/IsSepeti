@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
+
+        <style type="text/css">
+            .ui-menu-list   {background-color: #d6d6d6 !important;}  
+            .ui-panel {
+                border-radius: 0px 0px 0px 0px !important;
+                border: 0px solid #A8A8A8;
+            }
+            .ui-panel .ui-panel-content {
+                padding: 0px !important;
+            }
+        </style>
+    </h:head>
+
+    <h:body style="margin: 0"> 
+        <h:form>
+            <p:panel style="background: #2d2d2d; color: white; max-height: 20px;">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 15%; text-align: right">
+                            <h:outputLabel style="color: white; padding-left: 20px;" for="username" value="#{loginControll.username}" /> 
+                        </td>
+                        <td style="width: 10%;text-align: left">
+                            <h:outputLabel style="color: aquamarine; padding-left: 20px;" for="password" value="#{loginControll.password}" />
+                        </td>
+                        <td style="width: 55%; text-align: right">
+                            <h:outputLink style="color: aquamarine; padding-left: 20px;"  value="#">
+                                <h:outputText value="Mesajlar(1)"></h:outputText>
+                            </h:outputLink>
+                        </td>
+                        <td style="width: 10%; text-align: center">
+                            <h:outputLink style="color: aquamarine; padding-left: 20px;"  value="#">
+                                <h:outputText value="Ihaleler(1)"></h:outputText>
+                            </h:outputLink>
+                        </td>
+                        <td style="width: 10%; text-align: left">
+                            <h:outputLink style="color: aquamarine; padding-left: 20px;"  value="#">
+                                <h:outputText value="Size Ozel(0)"></h:outputText>
+                            </h:outputLink>
+                        </td>
+                    </tr>
+                </table>
+
+            </p:panel>
+             <p:separator id="separator" style="border-color: #c31212; padding: 0px; margin: 0px;"/>
+        </h:form>
+        
+        <h:form>  
+         
+
+            <p:menubar>  
+
+                <p:menuitem value="Ana Sayfa" id="ana" ajax="false"   url="anasayfa.xhtml" icon="ui-icon-home" style="margin-left: 150px"/> 
+
+                <p:menuitem value="İlan Ver"           ajax="false"  url="#" icon="ui-icon-script" style="padding-left: 15px;"/> 
+
+                <p:menuitem value="İlan Ara"           ajax="false" url="#"  icon="ui-icon-circle-zoomin" style="padding-left: 15px;" /> 
+
+                <p:submenu  label="Hesabım" icon="ui-icon-gear" ajax="false" style="position: absolute; right: 75px;" >  
+                    <p:submenu label="Ayarlar" icon="ui-icon-refresh">  
+                        <p:menuitem value="Ayar1" ajax="false" actionListener="#" icon="ui-icon-disk" update="messages"/>  
+                        <p:menuitem value="Ayar2" ajax="false" actionListener="#" icon="ui-icon-arrowrefresh-1-w" update="messages"/>  
+                    </p:submenu>  
+                    <p:submenu label="Ayar3" icon="ui-icon-newwin">  
+                        <p:menuitem value="Delete" actionListener="#" icon="ui-icon-close" update="messages" ajax="false"/>  
+                    </p:submenu>  
+                </p:submenu>       
+
+                <p:menuitem  value="Çıkış" ajax="false"  actionListener="#{loginControll.doLogout()}" icon="ui-icon-close" style="position: absolute; right: 15px;"  />
+
+            </p:menubar> 
+            
+            <p:menubar style="height: 20px; padding-bottom: 10px" autoDisplay="false">  
+                //same content as default menubar  
+            </p:menubar>  
+        </h:form>  
+
+
+    </h:body>
+
+ 
+</ui:composition>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    
+    
+    
+    <h:head>
+        <title>TODO supply a title</title>
+        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
+
+        <style type="text/css">
+            .ui-menu-list   {background-color: #d6d6d6 !important;}  
+            .menubar {width: 90% !important; margin:auto !important;}
+
+        </style>
+
+    </h:head>
+    <h:body>
+        <h:form id="menuform">
+            <p:menubar model="#{menuBean.model}" /> 
+        </h:form>        
+    </h:body>
+
+    <p:growl id="growl" showDetail="true" life="3000" /> 
+
+    <p:dialog id="dialog" header="Login" widgetVar="dlg">  
+        <h:form>  
+
+            <h:panelGrid columns="2" cellpadding="5">  
+                <h:outputLabel for="username" value="Username:" />  
+                <p:inputText value="#{girisKontrol.username}"   
+                             id="username" required="true" label="username" />  
+
+                <h:outputLabel for="password" value="Password:" />  
+                <h:inputSecret value="#{girisKontrol.password}"   
+                               id="password" required="true" label="password" />  
+
+                <f:facet name="footer">  
+                    <p:commandButton id="loginButton" value="Login" update=":growl"   
+                                     actionListener="#{girisKontrol.kontrol}"  
+                                     oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                </f:facet>  
+            </h:panelGrid>  
+
+        </h:form>  
+    </p:dialog>  
+
+    <script type="text/javascript">  
+        function handleLoginRequest(xhr, status, args) {  
+            if(args.validationFailed || !args.loggedIn) {  
+                jQuery('#dialog').effect("shake", { times:3 }, 100);                   
+            } else {  
+                dlg.hide(); 
+                jQuery('#loginLink').fadeOut(); 
+
+            }  
+        }  
+    </script>  
+    
+</ui:composition>
