@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.May.2012 14:08:22 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="issepeti" name="com.ispt.adverts.Adverts" table="adverts">
+    <id name="idIlanlar" type="java.lang.Integer">
+      <column name="IdIlanlar"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.ispt.users.Users" fetch="select" name="users">
+      <column name="Users_IdUsers" not-null="true"/>
+    </many-to-one>
+    <property name="isTanimi" type="string">
+      <column length="45" name="isTanimi"/>
+    </property>
+    <property name="isAciklamasi" type="string">
+      <column length="100" name="isAciklamasi"/>
+    </property>
+    <property name="isAlani" type="string">
+      <column length="45" name="isAlani"/>
+    </property>
+    <property name="malzeme" type="string">
+      <column length="10" name="malzeme"/>
+    </property>
+    <property name="sehir" type="string">
+      <column length="45" name="sehir"/>
+    </property>
+    <property name="il" type="string">
+      <column length="50" name="il"/>
+    </property>
+    <property name="acikAdres" type="string">
+      <column length="100" name="acikAdres"/>
+    </property>
+    <property name="yayinSuresi" type="timestamp">
+      <column length="19" name="yayinSuresi"/>
+    </property>
+    <property name="butce" type="string">
+      <column length="45" name="butce"/>
+    </property>
+    <property name="anaVitrin" type="string">
+      <column length="10" name="anaVitrin"/>
+    </property>
+    <property name="sektorelVitrin" type="string">
+      <column length="10" name="sektorelVitrin"/>
+    </property>
+    <property name="ekBilgi" type="string">
+      <column length="100" name="ekBilgi"/>
+    </property>
+  </class>
+</hibernate-mapping>

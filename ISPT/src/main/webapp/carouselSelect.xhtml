@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+            <table width="100%">
+                <tr>
+                    <td width="40%">
+                <h:form id="form">  
+                    <p:carousel id="carousel" value="#{startUpListener.adVtL}" 
+                                var="adModel" itemStyleClass="carItem" headerText="Vitrin" style="width: 410px; height: 300px;"
+                                autoPlayInterval="4000" effect="easeInStrong" circular="true" >  
+                        <p:column>  
+                            <p:graphicImage id="image" value="resource/images/ISPTkucuk.gif"/>   
+
+                            <h:panelGrid columns="3" style="width:100%" cellpadding="5">  
+                                <h:outputText value="Sektör: " /><h:outputText id="model" value="#{adModel.isAlani}" /> <h:outputText/> 
+                                <h:outputText value="Şehir: " /><h:outputText  value="#{adModel.sehir}" />  <h:outputText/>
+                                <h:outputText value="Şehir: " /><h:outputText  value="#{adModel.butce}" />  <h:outputText/>
+                            </h:panelGrid>  
+
+                            <p:commandLink id="view" update=":form:carDetail"  
+                                           oncomplete="carDialog.show()" title="View Detail">  
+
+                                <f:setPropertyActionListener value="#{adModel}"   
+                                                             target="#{startUpListener.advertsSelected}" /> 
+                                <p:graphicImage value="resource/images/ISPTkucuk.gif"/>  
+                            </p:commandLink>  
+
+                        </p:column> 
+                    </p:carousel>  
+
+
+                    <p:dialog header="İlan detay" showEffect="fade" hideEffect="fade" modal="true"  
+                              widgetVar="carDialog">  
+
+                        <p:outputPanel id="carDetail" style="text-align:center;" layout="block">  
+                            <p:graphicImage id="carImage" value="resource/images/ISPTkucuk.gif"/>  
+
+                            <h:panelGrid  columns="2" cellpadding="5">  
+                                <h:outputLabel for="modelNo" value="Sektör: " />  
+                                <h:outputText id="modelNo"   
+                                              value="#{startUpListener.advertsSelected.isAlani}" />  
+
+                                <h:outputLabel for="year" value="Şehir: " />  
+                                <h:outputText id="year"   
+                                              value="#{startUpListener.advertsSelected.sehir}" />  
+
+                                <h:outputLabel for="color" value="Fiyat: " />  
+                                <h:outputText id="color" value="#{startUpListener.advertsSelected.butce}"></h:outputText>   
+                            </h:panelGrid>  
+                        </p:outputPanel>  
+
+                    </p:dialog>  
+
+                </h:form>
+                </td>
+                <td width="60%">
+
+                </td>
+                </tr>
+            </table>
+
+</ui:composition>
+
+
+
+
+
+

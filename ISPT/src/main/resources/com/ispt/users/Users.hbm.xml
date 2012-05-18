@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.May.2012 14:08:22 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="issepeti" name="com.ispt.users.Users" table="users">
+    <id name="idUsers" type="java.lang.Integer">
+      <column name="IdUsers"/>
+      <generator class="identity"/>
+    </id>
+    <property name="isim" type="string">
+      <column length="45" name="isim"/>
+    </property>
+    <property name="soyisim" type="string">
+      <column length="45" name="soyisim"/>
+    </property>
+    <property name="mail" type="string">
+      <column length="45" name="mail"/>
+    </property>
+    <property name="sifre" type="string">
+      <column length="45" name="sifre"/>
+    </property>
+    <property name="telefon" type="string">
+      <column length="45" name="telefon"/>
+    </property>
+    <property name="sehir" type="string">
+      <column length="45" name="sehir"/>
+    </property>
+    <property name="il" type="string">
+      <column length="45" name="il"/>
+    </property>
+    <property name="cinsiyet" type="string">
+      <column length="45" name="cinsiyet"/>
+    </property>
+    <set inverse="true" name="advertses">
+      <key>
+        <column name="Users_IdUsers" not-null="true"/>
+      </key>
+      <one-to-many class="com.ispt.adverts.Adverts"/>
+    </set>
+  </class>
+</hibernate-mapping>

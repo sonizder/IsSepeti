@@ -11,7 +11,7 @@ import java.util.List;
  * @author s1r
  */
 public abstract class HibCrudAbst<T> {
-    public abstract void create(T domainObj);
+    public abstract boolean create(T domainObj);
     public abstract int delete(String sorgu);   
     public abstract List read(String sorgu);
 }

@@ -10,8 +10,10 @@ import com.ispt.hib.core.HibCrud;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -26,30 +28,33 @@ public class UsersSave implements Serializable{
 
     public UsersSave() {
         newUsers=new Users();
-    }
-
-    
-    
+    }      
     public Users getNewUsers() {
         return newUsers;
     }
     public void setNewUsers(Users newUsers) {
         this.newUsers = newUsers;
     }
-    
-    
-    
-   
+
+
     
     public void save(){
-        new HibCrud<Users>().create(newUsers);     
-        readUsers();
-        delete();
-        new HibCrud<Object>().update(22);
-
         
+        boolean kayit=new HibCrud<Users>().create(newUsers); 
         
+        String kayitMsg;
+        if(kayit==true){
+            kayitMsg="Kayıt İşlemi Başarılı";
+        }else{
+            kayitMsg="Kayıt İşlemi Başarısız!!!";
+        }
+        FacesMessage msg = new FacesMessage( "Hoşgeldiniz  "+newUsers.getIsim(),kayitMsg);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+//        readUsers();
+//        delete();
+//        new HibCrud<Object>().update(22);
     }
+    
     public void delete(){
         int id=14;
         String tName="Users";
@@ -63,10 +68,12 @@ public class UsersSave implements Serializable{
         }
     }
     
-    public boolean logIn(String isim, String mail){
-        
+    public boolean logIn( String mail,String sifre){
+        System.out.println("mail"+ mail+" sifre "+ sifre);
+        System.out.println("mail"+ mail+" sifre "+ sifre);
+
         List usersListesi = new ArrayList();
-        usersListesi=new HibCrud<Users>().read("from Users where Isim = '"+isim+"' and Mail = '"+mail+"'");
+        usersListesi=new HibCrud<Users>().read("from Users where mail = '"+mail+"' and sifre = '"+sifre+"'");
         
        if(usersListesi.size()>0){
            return true;
@@ -78,19 +85,20 @@ public class UsersSave implements Serializable{
     }
     
     //BU METHODU BURADAN KALDIR...Admin işlemi----------------------------------
-    public void readUsers(){
+    public List readUsers(String sorgu){
         
         List usersListesi = new ArrayList();
-        usersListesi=new HibCrud<Users>().read("from Users");
+        usersListesi=new HibCrud<Users>().read(sorgu);
         
-        for (int i = 0; i < usersListesi.size(); i++) {
-            Users theUsers=(Users) usersListesi.get(i);
-            System.out.println("************************************");
-            
-            System.out.println("adi: "+ theUsers.getIsim()+
-                    "  soyadi: "+ theUsers.getSoyisim());           
-            
-        }
+        return usersListesi;
+//        for (int i = 0; i < usersListesi.size(); i++) {
+//            Users theUsers=(Users) usersListesi.get(i);
+//            System.out.println("************************************");
+//            
+//            System.out.println("adi: "+ theUsers.getIsim()+
+//                    "  soyadi: "+ theUsers.getSoyisim());           
+//            
+//        }
     }
     //--------------------------------------------------------------------------
 

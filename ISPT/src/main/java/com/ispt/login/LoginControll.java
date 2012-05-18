@@ -24,15 +24,19 @@ public class LoginControll implements Serializable{
 
     public static final long serialVersionUID = 1L;
 
-    private  String username;
+    private  String mail;
     private  String password;
 
-    public String getUsername() {
-        return username;
+    public String getMail() {
+        return mail;
     }
-    public void setUsername(String username) {
-        this.username = username;
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
+    
+
+
     public String getPassword() {
         return password;
     }
@@ -49,13 +53,13 @@ public class LoginControll implements Serializable{
         
         boolean loggedIn=false;
 
-        boolean giris = new UsersSave().logIn(username, password);
+        boolean giris = new UsersSave().logIn(mail, password);
 
         if (giris == true) {
 
             loggedIn = true;
             
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Hoşgeldin", username);
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Hoşgeldin", mail);
             
             doRedirect("anasayfa.xhtml");
             
@@ -86,7 +90,7 @@ public class LoginControll implements Serializable{
          HttpSession httpses=(HttpSession)fc.getExternalContext().getSession(false);
          LoginControll nesnesi=(LoginControll)httpses.getAttribute("loginControll");
  
-         if(nesnesi.username==null){             
+         if(nesnesi.mail==null){             
              return "/template/menuBarCommon.xhtml";
          }else{
              return "/template/menuBarMember.xhtml";

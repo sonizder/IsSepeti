@@ -5,8 +5,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <title>TODO supply a title</title>
+        <title>İs İhale Platformu</title>
         <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
         <style type="text/css">
             .ui-menu-list   {background-color: #d6d6d6 !important;}  
@@ -18,71 +17,78 @@
                 padding: 0px !important;
             }
         </style>
-    </h:head>
 
-        <h:body style="margin: 0"> 
-            <h:form>
-                <p:panel style="background: #2d2d2d; color: white; max-height: 20px; min-height: 20px;">
-                </p:panel>
-                <p:separator id="separator" style="border-color: #c31212; padding: 0px; margin: 0px;"/>
-            </h:form>
 
+ 
+        <h:form>
+            <p:panel style="background: #2d2d2d; color: white; max-height: 25px; min-height: 25px;">
+            </p:panel>
+            <p:separator id="separator" style="border-color: #c31212; padding: 0px; margin: 0px;"/>
+        </h:form>
+
+        <h:form>  
+
+
+            <p:menubar>  
+                <tr>
+                    <td>
+                        <p:menuitem value="Ana Sayfa" id="ana" ajax="false"     actionListener="#{usersSave.readUsers}"         url="#" icon="ui-icon-home" style="margin-left: 150px"/> 
+
+                    </td>
+                    <td>
+                        <p:menuitem value="İlan Ver"  onclick="dlg.show()"  ajax="false" url="#" icon="ui-icon-script" style="padding-left: 15px;"/> 
+
+                    </td>
+                    <td>
+                        <p:menuitem value="İlan Ara"                        ajax="false" url="#"  icon="ui-icon-circle-zoomin" style="padding-left: 15px;" /> 
+
+                    </td>
+                </tr>
+
+
+
+                <p:menuitem  value="Giriş"   onclick="dlg.show()"   ajax="false" url="#" icon="ui-icon-person" style="position: absolute; right: 95px;" />
+
+                <p:menuitem value="Kaydol"             ajax="false" url="uyelik.xhtml" icon="ui-icon-key" style="position: absolute; right: 15px;" /> 
+
+            </p:menubar>  
+
+        </h:form>  
+
+        <p:growl id="growl" showDetail="true" life="3000" /> 
+
+        <p:dialog id="dialog" header="Login" widgetVar="dlg" modal="true" showEffect="explode" hideEffect="bounce">  
             <h:form>  
-                
 
-                <p:menubar>  
+                <h:panelGrid columns="2" cellpadding="5">  
+                    <h:outputLabel for="mail" value="Mail:" />  
+                    <p:inputText value="#{loginControll.mail}"   
+                                 id="mail" required="true" label="Mail" />  
 
-                    <p:menuitem value="Ana Sayfa" id="ana" ajax="false"   url="#" icon="ui-icon-home" style="margin-left: 150px"/> 
+                    <h:outputLabel for="sifre" value="Şifre:" />  
+                    <h:inputSecret value="#{loginControll.password}"   
+                                   id="sifre" required="true" label="sifre" />  
 
-                    <p:menuitem value="İlan Ver"           ajax="false"  url="#" icon="ui-icon-script" style="padding-left: 15px;"/> 
+                    <f:facet name="footer">  
+                        <p:commandButton id="loginButton" value="Login" update=":growl"   
+                                         actionListener="#{loginControll.controll}"  
+                                         oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                    </f:facet>  
+                </h:panelGrid>  
 
-                    <p:menuitem value="İlan Ara"           ajax="false" url="#"  icon="ui-icon-circle-zoomin" style="padding-left: 15px;" /> 
-
-                    <p:menuitem  value="Giriş"   onclick="dlg.show()"           ajax="false" url="#"  icon="ui-icon-person" style="position: absolute; right: 95px;" />
-
-                    <p:menuitem value="Kaydol"             ajax="false" url="index.jsp" icon="ui-icon-key" style="position: absolute; right: 15px;" /> 
-
-                </p:menubar>  
-                <p:menubar style="height: 20px; padding-bottom: 10px" autoDisplay="false">  
-                    //same content as default menubar  
-                </p:menubar>  
             </h:form>  
+        </p:dialog>  
 
-            <p:growl id="growl" showDetail="true" life="3000" /> 
-
-            <p:dialog id="dialog" header="Login" widgetVar="dlg">  
-                <h:form>  
-
-                    <h:panelGrid columns="2" cellpadding="5">  
-                        <h:outputLabel for="username" value="Username:" />  
-                        <p:inputText value="#{loginControll.username}"   
-                                     id="username" required="true" label="username" />  
-
-                        <h:outputLabel for="password" value="Password:" />  
-                        <h:inputSecret value="#{loginControll.password}"   
-                                       id="password" required="true" label="password" />  
-
-                        <f:facet name="footer">  
-                            <p:commandButton id="loginButton" value="Login" update=":growl"   
-                                             actionListener="#{loginControll.controll}"  
-                                             oncomplete="handleLoginRequest(xhr, status, args)"/>  
-                        </f:facet>  
-                    </h:panelGrid>  
-
-                </h:form>  
-            </p:dialog>  
-
-            <script type="text/javascript">  
-                function handleLoginRequest(xhr, status, args) {  
-                    if(args.validationFailed || !args.loggedIn) {  
-                        jQuery('#dialog').effect("shake", { times:3 }, 100);                   
-                    } else {  
-                        dlg.hide(); 
-                    }  
+        <script type="text/javascript">  
+            function handleLoginRequest(xhr, status, args) {  
+                if(args.validationFailed || !args.loggedIn) {  
+                    jQuery('#dialog').effect("shake", { times:3 }, 100);                   
+                } else {  
+                    dlg.hide(); 
                 }  
-            </script>
+            }  
+        </script>
 
 
-        </h:body>
 
 </ui:composition>

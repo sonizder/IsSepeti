@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+
+        <title>İs İhale Platformu</title>
+        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
+        <style type="text/css">
+            .logo{color: #b4284b; font-size: 24px; font-weight: bold; vertical-align: text-top} 
+            #inlfttable {  align:left; width:100%; margin: 5px;}
+        </style>
+        
+
+
+
+            <table id="inlfttable" border="1px;">
+                     <tr>
+                          <td>
+                             <h:graphicImage value="resource/images/ISPTkucuk.gif" />
+                             <h:outputLabel class="logo">İş Sepeti</h:outputLabel>
+                          </td>
+
+                           <td>
+                                <h:form>
+                                    <p:panelGrid columns="4">
+                                        <p:autoComplete forceSelection="false"  completeMethod="#{advertComplate.complete}"/>
+                                        
+                                        <p:selectOneMenu id="city" value="#{usersSave.newUsers.sehir}">  
+                                            <f:selectItem itemLabel="Şehir Seçin" itemValue="" />  
+                                            <f:selectItems value="#{citysAndSub.cities}" />  
+                                            <p:ajax update="suburbs"  
+                                                    listener="#{citysAndSub.handleCityChange}" />  
+                                        </p:selectOneMenu>  
+
+                                        <p:selectOneMenu id="suburbs" value="#{usersSave.newUsers.il}">  
+                                            <f:selectItem itemLabel="İl Seçin" itemValue="" />  
+                                            <f:selectItems value="#{citysAndSub.suburbs}" />  
+                                        </p:selectOneMenu> 
+                                        
+                                        <p:commandButton value="İlan ver" action="uyelik.xhtml" 
+                                                         actionListener="#{advertsShowModel.showCase}"></p:commandButton>
+                                    </p:panelGrid>
+                                    
+                                </h:form>                               
+                           </td>
+                </tr>
+
+            </table> 
+                
+          
+</f:view>
+
+</ui:composition>

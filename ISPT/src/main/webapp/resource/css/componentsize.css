@@ -1,4 +1,6 @@
 .ui-widget {
     font-size: 95% !important;
 }
-.ui-menu-list   {background-color: #d6d6d6 !important;}
+.ui-menu-list   {
+    background-color: #d6d6d6 !important;
+}

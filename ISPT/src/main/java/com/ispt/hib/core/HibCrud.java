@@ -19,7 +19,8 @@ import org.hibernate.Transaction;
 public class HibCrud<T> extends HibCrudAbst<T> {
 
     @Override
-    public void create(T domainObj) {
+    public boolean create(T domainObj) {
+        boolean create=false;
         try {
 
             Session newSession = HibernateUtil.getSessionFactory().openSession();
@@ -28,9 +29,12 @@ public class HibCrud<T> extends HibCrudAbst<T> {
             System.out.println("Kayit basarili");
             txT.commit();
             newSession.close();
+            create=true;
         } catch (Exception e) {
+            create= false;
             e.printStackTrace();
         }
+        return create;
     }
 
     @Override

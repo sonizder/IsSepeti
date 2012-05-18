@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>ShowCase</title>
+        </f:facet>
+
+        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
+
+    </h:head>
+    <h:body>
+
+        <ui:composition template="template/template1.xhtml">
+
+            <ui:define name="leftcenter">
+                <h:form>
+                    <p:growl id="growl" sticky="true" showDetail="true" autoUpdate="true"/>
+                    <p:panel id="uyelikpnl" header="Yeni Üye Kaydı" style="background-color: #efefef; margin: 5px; width: 50%">                            
+
+                        <p:panelGrid columns="2" columnClasses="label, value" >
+
+                            <h:outputText value="Adınız: *" />
+                            <p:inputText required="true" id="isim"
+                                         value="#{usersSave.newUsers.isim}"                                    
+                                         validatorMessage="İsminizi Girmelisiniz!!!" />
+
+
+                            <h:outputText value="Soyadınız: *" />
+                            <p:inputText required="true" id="soyisim"
+                                         value="#{usersSave.newUsers.soyisim}" validatorMessage="Soyisminiz Girmelisiniz!!!" />
+
+
+                            <h:outputText value="E-Mail: *" />
+                            <p:inputText required="true" id="email"
+                                         value="#{usersSave.newUsers.mail}" validator="#{emailValidator.validate}" 
+                                         validatorMessage="Geçerli Bir Mail Adresi Girmediniz!!!"/> 
+
+
+                            <h:outputLabel for="pwd1" value="Password 1: *" /> 
+                            <p:password id="pwd1" value="#{usersSave.newUsers.sifre}"  feedback="true" 
+                                        match="pwd2"  required="true"
+                                        promptLabel="Lütfen Şifre Giriniz" weakLabel="Zayıf"  
+                                        goodLabel="Orta seviye" strongLabel="Güçlü" validatorMessage="Girdiğiniz Şifreler Eşleşmiyor!!!"/>
+
+
+                            <h:outputLabel for="pwd2" value="Password 2: *" /> 
+                            <p:password id="pwd2"  feedback="true" 
+                                        required="true"
+                                        promptLabel="Lütfen Şifreyi Tekrar Giriniz" weakLabel="Zayıf"  
+                                        goodLabel="Orta seviye" strongLabel="Güçlü" validatorMessage="Bir Şifre Belirlemek Zorundasınız!!!"/>
+
+
+                            <h:outputText value="Cep Numaranız : " />  
+                            <p:inputMask value="#{usersSave.newUsers.telefon}" mask="(999) 999-9999" required="true"                                     
+                                         validatorMessage="Lütfen Cep Numaranızı Girin. Sizinle İrtibat Kurmamız İçin Önemli!!!"/>
+
+
+                            <h:outputText value="Cinsiyetiniz: " />  
+                            <p:selectOneRadio id="cinsiyet" value="#{usersSave.newUsers.cinsiyet}">  
+                                <f:selectItem itemLabel="Erkek" itemValue="erkek" />  
+                                <f:selectItem itemLabel="Kadın" itemValue="kadın" />   
+                            </p:selectOneRadio>  
+
+                            <h:outputText value="Yaşadığınız Şehir : " /> 
+                            <p:selectOneMenu id="city" value="#{usersSave.newUsers.sehir}">  
+                                <f:selectItem itemLabel="Şehir Seçin" itemValue="" />  
+                                <f:selectItems value="#{citysAndSub.cities}" />  
+                                <p:ajax update="suburbs"  
+                                        listener="#{citysAndSub.handleCityChange}" />  
+                            </p:selectOneMenu>  
+
+                            <h:outputText value="Yaşadığınız İlçe : " /> 
+                            <p:selectOneMenu id="suburbs" value="#{usersSave.newUsers.il}">  
+                                <f:selectItem itemLabel="İl Seçin" itemValue="" />  
+                                <f:selectItems value="#{citysAndSub.suburbs}" />  
+                            </p:selectOneMenu>  
+
+
+                        </p:panelGrid>  
+                        <p:commandButton value="Kaydet" update="growl" 
+                                         actionListener="#{usersSave.save()}"></p:commandButton>
+                    </p:panel>
+
+                </h:form> 
+            </ui:define>
+            
+        </ui:composition>
+
+
+    </h:body>
+
+</html>
