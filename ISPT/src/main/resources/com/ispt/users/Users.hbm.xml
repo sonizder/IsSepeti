@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13.May.2012 14:08:22 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 16.May.2012 19:03:55 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
   <class catalog="issepeti" name="com.ispt.users.Users" table="users">
     <id name="idUsers" type="java.lang.Integer">
@@ -32,6 +32,12 @@
       <column length="45" name="cinsiyet"/>
     </property>
     <set inverse="true" name="advertses">
+      <key>
+        <column name="Users_IdUsers" not-null="true"/>
+      </key>
+      <one-to-many class="com.ispt.adverts.Adverts"/>
+    </set>
+    <set inverse="true" name="advertses_1">
       <key>
         <column name="Users_IdUsers" not-null="true"/>
       </key>

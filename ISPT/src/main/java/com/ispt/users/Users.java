@@ -1,5 +1,5 @@
 package com.ispt.users;
-// Generated 13.May.2012 14:08:22 by Hibernate Tools 3.2.1.GA
+// Generated 16.May.2012 19:03:55 by Hibernate Tools 3.2.1.GA
 
 
 import com.ispt.adverts.Adverts;
@@ -22,11 +22,12 @@ public class Users  implements java.io.Serializable {
      private String il;
      private String cinsiyet;
      private Set<Adverts> advertses = new HashSet<Adverts>(0);
+     private Set<Adverts> advertses_1 = new HashSet<Adverts>(0);
 
     public Users() {
     }
 
-    public Users(String isim, String soyisim, String mail, String sifre, String telefon, String sehir, String il, String cinsiyet, Set<Adverts> advertses) {
+    public Users(String isim, String soyisim, String mail, String sifre, String telefon, String sehir, String il, String cinsiyet, Set<Adverts> advertses, Set<Adverts> advertses_1) {
        this.isim = isim;
        this.soyisim = soyisim;
        this.mail = mail;
@@ -36,6 +37,7 @@ public class Users  implements java.io.Serializable {
        this.il = il;
        this.cinsiyet = cinsiyet;
        this.advertses = advertses;
+       this.advertses_1 = advertses_1;
     }
    
     public Integer getIdUsers() {
@@ -107,6 +109,13 @@ public class Users  implements java.io.Serializable {
     
     public void setAdvertses(Set<Adverts> advertses) {
         this.advertses = advertses;
+    }
+    public Set<Adverts> getAdvertses_1() {
+        return this.advertses_1;
+    }
+    
+    public void setAdvertses_1(Set<Adverts> advertses_1) {
+        this.advertses_1 = advertses_1;
     }
 
 

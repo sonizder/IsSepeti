@@ -50,9 +50,6 @@ public class UsersSave implements Serializable{
         }
         FacesMessage msg = new FacesMessage( "Hoşgeldiniz  "+newUsers.getIsim(),kayitMsg);
         FacesContext.getCurrentInstance().addMessage(null, msg);
-//        readUsers();
-//        delete();
-//        new HibCrud<Object>().update(22);
     }
     
     public void delete(){
@@ -72,8 +69,11 @@ public class UsersSave implements Serializable{
         System.out.println("mail"+ mail+" sifre "+ sifre);
         System.out.println("mail"+ mail+" sifre "+ sifre);
 
-        List usersListesi = new ArrayList();
-        usersListesi=new HibCrud<Users>().read("from Users where mail = '"+mail+"' and sifre = '"+sifre+"'");
+        List<Users> usersListesi = new ArrayList<Users>();
+        usersListesi=(List<Users>)new HibCrud<Users>().read("from Users where mail = '"+mail+"' and sifre = '"+sifre+"'");
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().put("id", usersListesi.get(0).getIdUsers());
         
        if(usersListesi.size()>0){
            return true;

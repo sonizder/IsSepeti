@@ -54,41 +54,8 @@
             </p:menubar>  
 
         </h:form>  
-
-        <p:growl id="growl" showDetail="true" life="3000" /> 
-
-        <p:dialog id="dialog" header="Login" widgetVar="dlg" modal="true" showEffect="explode" hideEffect="bounce">  
-            <h:form>  
-
-                <h:panelGrid columns="2" cellpadding="5">  
-                    <h:outputLabel for="mail" value="Mail:" />  
-                    <p:inputText value="#{loginControll.mail}"   
-                                 id="mail" required="true" label="Mail" />  
-
-                    <h:outputLabel for="sifre" value="Şifre:" />  
-                    <h:inputSecret value="#{loginControll.password}"   
-                                   id="sifre" required="true" label="sifre" />  
-
-                    <f:facet name="footer">  
-                        <p:commandButton id="loginButton" value="Login" update=":growl"   
-                                         actionListener="#{loginControll.controll}"  
-                                         oncomplete="handleLoginRequest(xhr, status, args)"/>  
-                    </f:facet>  
-                </h:panelGrid>  
-
-            </h:form>  
-        </p:dialog>  
-
-        <script type="text/javascript">  
-            function handleLoginRequest(xhr, status, args) {  
-                if(args.validationFailed || !args.loggedIn) {  
-                    jQuery('#dialog').effect("shake", { times:3 }, 100);                   
-                } else {  
-                    dlg.hide(); 
-                }  
-            }  
-        </script>
-
+   
+       
 
 
 </ui:composition>

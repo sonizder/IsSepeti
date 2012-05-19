@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13.May.2012 14:08:22 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 16.May.2012 19:03:55 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
   <class catalog="issepeti" name="com.ispt.adverts.Adverts" table="adverts">
     <id name="idIlanlar" type="java.lang.Integer">
@@ -46,5 +46,11 @@
     <property name="ekBilgi" type="string">
       <column length="100" name="ekBilgi"/>
     </property>
+    <set inverse="true" name="offerses">
+      <key>
+        <column name="Adverts_IdIlanlar" not-null="true"/>
+      </key>
+      <one-to-many class="com.ispt.offers.Offers"/>
+    </set>
   </class>
 </hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16.May.2012 19:03:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="issepeti" name="com.ispt.offers.Offers" table="offers">
+    <id name="idoffers" type="java.lang.Integer">
+      <column name="idoffers"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.ispt.adverts.Adverts" fetch="select" name="adverts">
+      <column name="Adverts_IdIlanlar" not-null="true"/>
+    </many-to-one>
+    <property name="teklifVerenId" type="int">
+      <column name="teklifVerenId" not-null="true"/>
+    </property>
+    <property name="teklifAlanId" type="int">
+      <column name="teklifAlanId" not-null="true"/>
+    </property>
+    <property name="teklifMesaj" type="string">
+      <column length="500" name="teklifMesaj"/>
+    </property>
+    <property name="cevapMesaj" type="string">
+      <column length="500" name="cevapMesaj"/>
+    </property>
+    <property name="okunmusmu" type="java.lang.Boolean">
+      <column name="okunmusmu"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -5,27 +5,27 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-            <table width="100%">
-                <tr>
-                    <td width="40%">
+            
+              
                 <h:form id="form">  
-                    <p:carousel id="carousel" value="#{startUpListener.adVtL}" 
-                                var="adModel" itemStyleClass="carItem" headerText="Vitrin" style="width: 410px; height: 300px;"
+                    <p:carousel id="carousel" value="#{startUpListener.adVtL}" rows="3" style="margin: 20px 20px 0px 0px;"
+                                var="adModel" itemStyleClass="carItem" headerText="Vitrin"
                                 autoPlayInterval="4000" effect="easeInStrong" circular="true" >  
                         <p:column>  
-                            <p:graphicImage id="image" value="resource/images/ISPTkucuk.gif"/>   
+                            <p:graphicImage id="image" value="resource/images/ISPTkucuk.gif"/> 
 
-                            <h:panelGrid columns="3" style="width:100%" cellpadding="5">  
-                                <h:outputText value="Sektör: " /><h:outputText id="model" value="#{adModel.isAlani}" /> <h:outputText/> 
-                                <h:outputText value="Şehir: " /><h:outputText  value="#{adModel.sehir}" />  <h:outputText/>
-                                <h:outputText value="Şehir: " /><h:outputText  value="#{adModel.butce}" />  <h:outputText/>
+                            <h:panelGrid columns="1" style="width: 100%" cellpadding="5">  
+                                <h:outputText value="#{adModel.isAlani} " />
+                                <h:outputText value="#{adModel.sehir} " />
+                                <h:outputText value="#{adModel.butce} TL" />
                             </h:panelGrid>  
 
-                            <p:commandLink id="view" update=":form:carDetail"  
+                            <p:commandLink id="view" update=":form:carDetail" 
                                            oncomplete="carDialog.show()" title="View Detail">  
+                                
 
                                 <f:setPropertyActionListener value="#{adModel}"   
-                                                             target="#{startUpListener.advertsSelected}" /> 
+                                                             target="#{advertsCarouselSelected.advertsSelected}"/> 
                                 <p:graphicImage value="resource/images/ISPTkucuk.gif"/>  
                             </p:commandLink>  
 
@@ -40,28 +40,27 @@
                             <p:graphicImage id="carImage" value="resource/images/ISPTkucuk.gif"/>  
 
                             <h:panelGrid  columns="2" cellpadding="5">  
-                                <h:outputLabel for="modelNo" value="Sektör: " />  
-                                <h:outputText id="modelNo"   
-                                              value="#{startUpListener.advertsSelected.isAlani}" />  
+                                <h:outputLabel for="sektor" value="Sektör: " />  
+                                <h:outputText id="sektor"   
+                                              value="#{advertsCarouselSelected.advertsSelected.isAlani}" />  
 
-                                <h:outputLabel for="year" value="Şehir: " />  
-                                <h:outputText id="year"   
-                                              value="#{startUpListener.advertsSelected.sehir}" />  
+                                <h:outputLabel for="sehir" value="Şehir: " />  
+                                <h:outputText id="sehir"   
+                                              value="#{advertsCarouselSelected.advertsSelected.sehir}" />  
 
-                                <h:outputLabel for="color" value="Fiyat: " />  
-                                <h:outputText id="color" value="#{startUpListener.advertsSelected.butce}"></h:outputText>   
+                                <h:outputLabel for="fiyat" value="Fiyat: " />  
+                                <h:outputText id="fiyat" value="#{advertsCarouselSelected.advertsSelected.butce}"></h:outputText>  
+                                
+                                <p:commandLink action="#{offerNavigate.navigate}" update="growl2"                                                
+                                                oncomplete="handleLoginRequest(xhr, status, args)">                                    
+                                    <h:outputText value="Teklif Ver" style="color: blue"></h:outputText>
+                                </p:commandLink>
+                                
                             </h:panelGrid>  
                         </p:outputPanel>  
-
                     </p:dialog>  
-
+                    <p:growl id="growl2" showDetail="true" life="3000" /> 
                 </h:form>
-                </td>
-                <td width="60%">
-
-                </td>
-                </tr>
-            </table>
 
 </ui:composition>
 

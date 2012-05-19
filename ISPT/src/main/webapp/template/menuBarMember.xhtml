@@ -22,8 +22,6 @@
             }
         </style>
 
-
-
         <h:form>
             <p:panel style="background: #2d2d2d; color: white; max-height: 25px; min-height: 25px;">
                 <table style="width: 100%">
@@ -34,14 +32,19 @@
                         <td style="width: 10%;text-align: left">
                             <h:outputLabel class="siyahbar" for="password" value="#{loginControll.password}" />
                         </td>
-                        <td style="width: 55%; text-align: right">
+                        <td style="width: 45%; text-align: right">
                             <h:outputLink   value="#">
-                                <h:outputText class="siyahbar" value="Mesajlar(1)"></h:outputText>
+                                <h:outputText class="siyahbar" value="Aktif İhaleniz(#{userAccount.currentAdverts})"></h:outputText>                               
                             </h:outputLink>
                         </td>
-                        <td style="width: 10%; text-align: center">
+                        <td style="width: 10%; text-align: left">
                             <h:outputLink   value="#">
-                                <h:outputText class="siyahbar" value="Ihaleler(1)"></h:outputText>
+                                 <h:outputText class="siyahbar" value="Teklifler(#{userAccount.comingOffers})"></h:outputText>
+                            </h:outputLink>
+                        </td>
+                        <td style="width: 10%; text-align: left">
+                            <h:outputLink   value="#">
+                                <h:outputText class="siyahbar" value="Cevaplar(#{userAccount.comingmesaj})"></h:outputText>
                             </h:outputLink>
                         </td>
                         <td style="width: 10%; text-align: left">
