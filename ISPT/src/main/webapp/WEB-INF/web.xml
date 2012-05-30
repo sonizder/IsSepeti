@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <context-param>
         <param-name>javax.faces.PRODUCTION</param-name>
         <param-value>Development</param-value>
@@ -11,15 +8,13 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <welcome-file-list>
         <welcome-file>faces/anasayfa.xhtml</welcome-file>
     </welcome-file-list>
- 
-	<!-- JSF mapping -->
+    <!-- JSF mapping -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
- 
-	<!-- Map these files with JSF -->
+    <!-- Map these files with JSF -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -36,14 +31,17 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>15</session-timeout>
     </session-config>
-    
     <listener>
         <listener-class>com.ispt.adverts.showcase.StartUpListener</listener-class>
     </listener>
-
-
+    <resource-ref>
+        <description>jdbc:mysql://localhost:3306/issepeti</description>
+        <res-ref-name>dd</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
 </web-app>

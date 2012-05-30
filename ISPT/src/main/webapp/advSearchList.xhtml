@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form  id="formAdList" >
+        <style type="text/css">
+            .ui-panel-titlebar{
+                height: 13px !important;
+            }
+            .ui-panel-title{
+                color: #356AA0 !important;
+            }
+            .ilan{
+                font-weight: bold;
+                color: black !important;
+            }
+            .ilan2{
+                font-weight: bold;
+                color: blue !important;
+            }
+            .ui-datagrid-content{
+                min-height: 350px !important;                
+            }
+
+        </style>
+        <p:panelGrid columns="4" style="margin-top: 10px;">
+            <p:autoComplete forceSelection="false"  completeMethod="#{advertComplate.complete}" 
+                            value="#{advertsSearch.sector}"/>
+
+            <p:selectOneMenu id="city" value="#{advertsSearch.city}">  
+                <f:selectItem itemLabel="Şehir Seçin" itemValue="" />  
+                <f:selectItems value="#{citysAndSub.cities}"/>
+                <f:ajax execute="city" render="suburbs"
+                        listener="#{advertsSearch.handleCityChange}">
+                </f:ajax>
+
+            </p:selectOneMenu>  
+
+            <p:selectOneMenu id="suburbs" value="#{advertsSearch.suburb}">  
+                <f:selectItem itemLabel="İl Seçin" itemValue="" />  
+                <f:selectItems value="#{advertsSearch.suburbs}" /> 
+                <f:converter converterId="converter"></f:converter>
+            </p:selectOneMenu> 
+
+            <p:commandButton id="btn" value="İlan Ara"  icon="ui-icon-search" update=":formAdList:advList"
+                             action="#{advertsSearch.search}" >                            
+            </p:commandButton>
+        </p:panelGrid>
+
+
+        <div style="margin: 15px 10px 10px 10px;">
+            
+       
+
+        <p:dataGrid var="advertsL" value="#{startUpListener.advertsList}" columns="5" 
+                    style="height: 500px; min-height: 500px;" 
+                    rows="15" paginator="true" id="advList" paginatorPosition="top"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} 
+                    {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                    rowsPerPageTemplate="9,12,15">  
+            <p:column style="height: 500px;  min-height: 500px;">  
+                <p:panel header="#{advertsL.isAlani}" style="text-align:center; 
+                         background-color: #efefef; max-width: 150px;">  
+                    <h:panelGrid columns="1" style="width:100%; border: 1px solid #b4284b; 
+                                 border-radius: 6px 6px 2px 2px;">  
+                        <p:graphicImage value="resource/images/#{advertsL.isAlani}.png"/>                           
+                        <h:outputText value="#{advertsL.sehir}"   styleClass="ilan"/>  
+                        <h:outputText value="#{advertsL.il}"      styleClass="ilan"/>
+                        <h:outputText value="#{advertsL.butce}"   styleClass="ilan"/>
+
+                        <p:commandLink update=":formAdList:advDetail" oncomplete="advDialog.show()" title="İlan Detay">  
+                            <p:graphicImage value="resource/images/search.png"/>   
+                            <f:setPropertyActionListener value="#{advertsL}"   
+                                                         target="#{advertsCarouselSelected.advertsSelected}" />  
+                        </p:commandLink>  
+                    </h:panelGrid>  
+                </p:panel>  
+            </p:column>  
+
+        </p:dataGrid>  
+ </div>
+
+
+        <p:dialog  header="İlan Detay" widgetVar="advDialog" modal="true">  
+            <p:outputPanel id="advDetail" style="text-align:center;" layout="block">  
+
+                <p:graphicImage value="resource/images/#{advertsCarouselSelected.advertsSelected.isAlani}.png"/>  
+
+                <h:panelGrid  columns="2" cellpadding="5">  
+                    <h:outputLabel  value="İş Alanı: " styleClass="ilan"/>  
+                    <h:outputText   value="#{advertsCarouselSelected.advertsSelected.isAlani}" styleClass="ilan2"/>  
+
+                    <h:outputLabel  value="Şehir: " styleClass="ilan"/>  
+                    <h:outputText   value="#{advertsCarouselSelected.advertsSelected.sehir}"    styleClass="ilan2"/>  
+
+                    <h:outputLabel  value="İlçe: " styleClass="ilan"/>  
+                    <h:outputText   value="#{advertsCarouselSelected.advertsSelected.il}"       styleClass="ilan2"/> 
+
+                    <h:outputLabel  value="Fiyat: " styleClass="ilan"/>  
+                    <h:outputText   value="#{advertsCarouselSelected.advertsSelected.butce}"    styleClass="ilan2"/>                              
+
+                    <h:outputLabel  value="Tanım: " styleClass="ilan"/>  
+                    <h:outputText   value="#{advertsCarouselSelected.advertsSelected.isTanimi}" styleClass="ilan2"/>
+
+                    <p:commandLink action="#{offerNavigate.navigate}" update="growlAdvDetail"> 
+                        <p:graphicImage value="resource/images/offerHand.png"/>                   
+                        <f:param name="foo" value="advSearchList" />
+                    </p:commandLink>
+                        <h:outputText value="Teklif Ver" styleClass="ilan"/>
+                </h:panelGrid>  
+            </p:outputPanel>  
+        </p:dialog> 
+        <p:growl id="growlAdvDetail" showDetail="true" life="3000" />                   
+
+    </h:form>                               
+
+</ui:composition>

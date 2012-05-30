@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <style type="text/css">
+        .ui-panel-titlebar{
+            height: 15px !important;
+            padding-bottom: 5px !important;
+        }
+    </style>
+
+    <h:form id="formAdList">  
+
+        <p:dataGrid var="advertsL" value="#{startUpListener.adVtL}" columns="4"  
+                    rows="12" paginator="true"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} 
+                    {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                    rowsPerPageTemplate="9,12,15">  
+
+            <p:column>  
+                <p:panel header="#{advertsL.isAlani}"  style="text-align:center; background-color: #efefef;">  
+                    <h:panelGrid columns="1" style="width:100%; border: 1px solid #b4284b; 
+                                 border-radius: 6px 6px 2px 2px;">  
+                        <p:graphicImage value="resource/images/Boya-Badana.png"/>   
+
+                        <h:outputText value="#{advertsL.butce}" />  
+
+                        <p:commandLink update=":formAdList:carDe" oncomplete="carDi.show()" title="View Detail">  
+                            <p:graphicImage value="resource/images/search.png"/>   
+                            <f:setPropertyActionListener value="#{advertsL}"   
+                                                         target="#{advertsCarouselSelected.advertsSelected}" />  
+                        </p:commandLink>  
+                    </h:panelGrid>  
+                </p:panel>  
+            </p:column>  
+
+        </p:dataGrid>  
+
+        <p:dialog  header="Car Detail" widgetVar="carDi" modal="true">  
+            <p:outputPanel id="carDe" style="text-align:center;" layout="block">  
+
+                <p:graphicImage value="resource/images/Boya-Badana.png"/>  
+
+                <h:panelGrid  columns="2" cellpadding="5">  
+                    <h:outputLabel for="modelNo" value="İs ALanı: " />  
+                    <h:outputText id="modelNo" value="#{advertsCarouselSelected.advertsSelected.isAlani}" />  
+
+                    <h:outputLabel for="year" value="Şehir: " />  
+                    <h:outputText id="year" value="#{advertsCarouselSelected.advertsSelected.sehir}" /> 
+                    
+                    <h:outputLabel for="ilce" value="İlçe: " />  
+                    <h:outputText id="ilce" value="#{advertsCarouselSelected.advertsSelected.il}"></h:outputText> 
+
+                    <h:outputLabel for="color" value="Fiyat: " />  
+                    <h:outputText id="color" value="#{advertsCarouselSelected.advertsSelected.butce}" /> 
+
+                    <h:outputLabel value="Tanım: " />  
+                    <h:outputText  value="#{advertsCarouselSelected.advertsSelected.isTanimi}"></h:outputText>
+
+                     
+                </h:panelGrid>  
+            </p:outputPanel>  
+        </p:dialog>  
+
+    </h:form>  
+
+</ui:composition>

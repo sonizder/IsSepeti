@@ -91,9 +91,9 @@ public class LoginControll implements Serializable{
          LoginControll nesnesi=(LoginControll)httpses.getAttribute("loginControll");
  
          if(nesnesi.mail==null){             
-             return "/template/menuBarCommon.xhtml";
+             return "/WEB-INF/template/menuBarCommon.xhtml";
          }else{
-             return "/template/menuBarMember.xhtml";
+             return "/WEB-INF/template/menuBarMember.xhtml";
          }
     }
     

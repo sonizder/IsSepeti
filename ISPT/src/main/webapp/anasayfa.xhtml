@@ -6,22 +6,25 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="template/template1.xhtml">
+                template="/WEB-INF/template/template1.xhtml">
 
-    <ui:define name="firstly"> 
-        <ui:include src="dialog.xhtml"/>                
-    </ui:define>    
+
 
     <ui:define name="leftcenter">              
         <ui:include src="indexleft.xhtml"/>
+          
     </ui:define>
 
     <ui:define name="rightcenter"> 
-        <ui:include src="carouselSelect.xhtml"/> 
+        <ui:include src="indexRight.xhtml"/> 
     </ui:define>
 
     <f:facet name="footer">  
         <p:commandButton type="button" value="Save" icon="ui-icon-check" style="margin:0"/>  
     </f:facet>
+
+
+   
+
 
 </ui:composition>

@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/ISPT"/>
+<Context antiJARLocking="true" path="/ISPT">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="ss" password="1111" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/issepeti" username="root"/>
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="dd" password="1111" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/issepeti" username="root"/>
+</Context>

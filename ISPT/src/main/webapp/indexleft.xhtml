@@ -4,53 +4,36 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
-    <f:view contentType="text/html">
-
-        <title>İs İhale Platformu</title>
-        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
-        <style type="text/css">
-            .logo{color: #b4284b; font-size: 24px; font-weight: bold; vertical-align: text-top} 
-            #inlfttable {  align:left; width:100%; margin: 5px;}
-        </style>
-        
 
 
+    <style type="text/css">
+        .logo{color: #b4284b; font-size: 28px; font-weight: bold;} 
+        #inlfttable {   width:100%; margin: 5px;}
+    </style>
 
-        <table id="inlfttable" style="border: 1px solid #b4284b; vertical-align: top ">
-                     <tr>
-                          <td>
-                             <h:graphicImage value="resource/images/ISPTkucuk.gif" />
-                             <h:outputLabel class="logo">İş Sepeti</h:outputLabel>
-                          </td>
 
-                           <td>
-                                <h:form>
-                                    <p:panelGrid columns="4">
-                                        <p:autoComplete forceSelection="false"  completeMethod="#{advertComplate.complete}"/>
-                                        
-                                        <p:selectOneMenu id="city" value="#{usersSave.newUsers.sehir}">  
-                                            <f:selectItem itemLabel="Şehir Seçin" itemValue="" />  
-                                            <f:selectItems value="#{citysAndSub.cities}" />  
-                                            <p:ajax update="suburbs"  
-                                                    listener="#{citysAndSub.handleCityChange}" />  
-                                        </p:selectOneMenu>  
+    <table id="inlfttable" style=" margin-top: 30px;">
+        <tr style="vertical-align: central;">
+            <td style="vertical-align: top;">
+                <h:graphicImage value="resource/images/logo.png"/>
+                <h:outputLabel class="logo" style=" text-shadow:4px 4px 8px red; margin-left: 10px;">İş İhale Platformu</h:outputLabel>
+            </td>
+        </tr>
+        <tr>            
+            <td>
+                <ui:include src="advSearchList.xhtml"></ui:include>                            
+            </td>
+        </tr>     
+    </table> 
 
-                                        <p:selectOneMenu id="suburbs" value="#{usersSave.newUsers.il}">  
-                                            <f:selectItem itemLabel="İl Seçin" itemValue="" />  
-                                            <f:selectItems value="#{citysAndSub.suburbs}" />  
-                                        </p:selectOneMenu> 
-                                        
-                                        <p:commandButton value="İlan ver" action="uyelik.xhtml" 
-                                                         actionListener="#{advertsShowModel.showCase}"></p:commandButton>
-                                    </p:panelGrid>
-                                    
-                                </h:form>                               
-                           </td>
-                </tr>
+    <table style="width: 100%">
+        <tr>
+            <td>
+             
+            </td>
+        </tr>
+    </table>
 
-            </table> 
-                
-          
-</f:view>
+
 
 </ui:composition>

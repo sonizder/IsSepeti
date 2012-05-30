@@ -18,42 +18,45 @@ import javax.servlet.ServletContextListener;
  * @author s1r
  */
 @ManagedBean
-public class StartUpListener implements ServletContextListener, Serializable{
-    
-public  static List<Adverts> adVtL ;
-//private Adverts advertsSelected;
+public class StartUpListener implements ServletContextListener, Serializable {
 
-//    public Adverts getAdvertsSelected() {
-//        return advertsSelected;
-//    }
-//
-//    public void setAdvertsSelected(Adverts advertsSelected) {
-//        this.advertsSelected = advertsSelected;
-//    }
 
-    public List<Adverts> getAdVtL() {
-        return adVtL;
+    public static List<Adverts> adVitrinL;    
+    public static List<Adverts> advertsList;
+
+
+
+    public List<Adverts> getAdvertsList() {
+        return advertsList;
     }
 
+    public static void setAdvertsList(List<Adverts> advertsList) {
+        StartUpListener.advertsList = advertsList;
+    }
+
+    public  List<Adverts> getAdVitrinL() {
+        return adVitrinL;
+    }
+
+    public static void setAdVitrinL(List<Adverts> adVitrinL) {
+        StartUpListener.adVitrinL = adVitrinL;
+    }
     
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        adVtL= new ArrayList<Adverts>();
-        List<Adverts> adVtListesi= new ArrayList<Adverts>();
-        adVtListesi =(List<Adverts>) new HibCrud<Adverts>().read("from Adverts where anaVitrin='false'");
-    
-            for (int j = 0; j < adVtListesi.size(); j++) {
-                adVtL.add(adVtListesi.get(j));
-                adVtL.add(adVtListesi.get(j));
-                adVtL.add(adVtListesi.get(j));
-                adVtL.add(adVtListesi.get(j));
-            }
-     
+        
+        
+        adVitrinL = new ArrayList<Adverts>();
+        adVitrinL = (List<Adverts>) new HibCrud<Adverts>().read("from Adverts where anaVitrin='false'");
+
+
+        advertsList = new ArrayList<Adverts>();
+        advertsList = (List<Adverts>) new HibCrud<Adverts>().read("from Adverts");
+
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
     }
-    
 }

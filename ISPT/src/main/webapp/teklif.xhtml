@@ -6,64 +6,27 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="template/template1.xhtml">
-    
-<script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript"></script>
+                template="/WEB-INF/template/template1.xhtml">
+
+    <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript"></script>
 
     <ui:define name="leftcenter">              
-        <h:form>
-            <h:outputText value="İNCELENEN İLAN:" style="color: #b4284b; margin: 30px 0px 0px 20px; "/>
-            <p:separator id="separator" style="border-color: #c31212; padding: 0px; margin-left: 20px; width: 470px;"/>
-            <p:panelGrid columns="4" style="margin: 20px 0px 0px 15px;">
-                
-                
+        <ui:include src="#{offerNavigate.leftside}"></ui:include>         
 
-                <h:outputText value="İlan İd: " style="color: blue"></h:outputText>
-                <h:outputText value="#{advertsOffer.adCSelected.advertsSelected.idIlanlar}" style="color: #b4284b;"></h:outputText>
-
-                <h:outputText value="Sektör: " style="color: blue"></h:outputText>
-                <h:outputText value="#{advertsOffer.adCSelected.advertsSelected.isAlani} " style="color: #b4284b;"></h:outputText>
-
-                <h:outputText value="Şehir: " style="color: blue"></h:outputText>
-                <h:outputText value="#{advertsOffer.adCSelected.advertsSelected.sehir} "></h:outputText>
-
-                <h:outputText value="Bütçe: " style="color: blue"></h:outputText>
-                <h:outputText value="#{advertsOffer.adCSelected.advertsSelected.butce} "></h:outputText>
-
-                <h:outputText value="İşin Tanımı: " style="color: blue"></h:outputText>
-                <h:outputText value="#{advertsOffer.adCSelected.advertsSelected.isTanimi} "></h:outputText>
-
-                <h:outputText value="Malzeme Varmı: " style="color: blue"></h:outputText>
-                <h:outputText value="#{advertsOffer.adCSelected.advertsSelected.malzeme} "></h:outputText> 
-
-                <h:outputText value="Yayın süresi: " style="color: blue"></h:outputText>
-                <h:outputText value="#{advertsOffer.adCSelected.advertsSelected.yayinSuresi} "></h:outputText>
-
-                <h:outputText value="İlave Bilgi: " style="color: blue"></h:outputText>
-                <h:outputText value="#{advertsOffer.adCSelected.advertsSelected.ekBilgi} "></h:outputText>      
-            </p:panelGrid>
-
-            <p:editor id="editor" value="#{advertsOffer.offer.teklifMesaj}" width="500" height="300" style="margin: 20px;"/>  
-
-            <h:panelGrid columns="2" style="margin: 20px;">  
-                <p:commandButton id="submitButton" value="Teklif Yap" actionListener="#{advertsOffer.save}" 
-                                 update="display" oncomplete="dlgoffer.show()" icon="ui-icon-disk" />  
-                <p:commandButton id="clearButton" type="button" value="Temizle" onclick="editor.clear()"  
-                                 icon="ui-icon-close" />  
-            </h:panelGrid>  
-
-            <p:dialog header="Teklifiniz" widgetVar="dlgoffer" showEffect="fade" hideEffect="fade" modal="true">  
-                <h:outputText id="display" value="#{advertsOffer.offer.teklifMesaj}" escape="false" />  
-            </p:dialog>
-        </h:form>
+        <p:dialog widgetVar="gMapDlg" width="625" height="400" modal="true">  
+            <p:gmap center="#{gMap.coordinate}" zoom="13" type="HYBRID"  
+                    style="width:600px;height:400px" widgetVar="mymap"/>  
+        </p:dialog>
     </ui:define>
+
 
     <ui:define name="rightcenter"> 
-        <ui:include src="carouselSelect.xhtml"/> 
-        
-        <p:gmap center="#{gMap.coordinate}" zoom="13" type="HYBRID"   
-        style="width:470px;height:300px; margin: 20px 20px 0px 0px;"  model="#{gMap.simpleModel}" /> 
+        <ui:include src="#{offerNavigate.rightside}"/> 
+
+        <p:gmap center="#{gMap.coordinate}" zoom="13" type="HYBRID"  rendered="#{offerNavigate.gmaprender}" 
+                style="width:470px;height:300px; margin: 20px 20px 0px 0px;"  model="#{gMap.simpleModel}" /> 
     </ui:define>
+
 
     <f:facet name="footer">  
         <p:commandButton type="button" value="Save" icon="ui-icon-check" style="margin:0"/>  

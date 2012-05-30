@@ -18,7 +18,7 @@ public class CitysAndSuburbs {
     private String city;
     private String suburb;
     private Map<String, String> cities = new HashMap<String, String>();
-    private Map<String, Map<String, String>> suburbsData = new HashMap<String, Map<String, String>>();
+    private static Map<String, Map<String, String>> suburbsData = new HashMap<String, Map<String, String>>();
     private Map<String, String> suburbs = new HashMap<String, String>();
 
     public Map<String, String> getCities() {
@@ -32,15 +32,12 @@ public class CitysAndSuburbs {
     public String getCity() {
         return city;
     }
-
     public void setCity(String city) {
         this.city = city;
     }
-
     public String getSuburb() {
         return suburb;
     }
-
     public void setSuburb(String suburb) {
         this.suburb = suburb;
     }
@@ -53,13 +50,15 @@ public class CitysAndSuburbs {
         this.suburbs = suburbs;
     }
 
-    public Map<String, Map<String, String>> getSuburbsData() {
+    public static Map<String, Map<String, String>> getSuburbsData() {
         return suburbsData;
     }
 
-    public void setSuburbsData(Map<String, Map<String, String>> suburbsData) {
-        this.suburbsData = suburbsData;
+    public static void setSuburbsData(Map<String, Map<String, String>> suburbsData) {
+        CitysAndSuburbs.suburbsData = suburbsData;
     }
+
+   
 
     public CitysAndSuburbs() {
         cities.put("Istanbul", "Istanbul");
@@ -87,10 +86,11 @@ public class CitysAndSuburbs {
     }
 
     public void handleCityChange() {
+        
         if (city != null && !city.equals("")) {
             suburbs = suburbsData.get(city);
         } else {
-//            suburbs = new HashMap<String, String>();
+            suburbs = new HashMap<String, String>();
         }
     }
 }

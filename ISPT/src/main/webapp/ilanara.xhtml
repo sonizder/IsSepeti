@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html      xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:p="http://primefaces.org/ui"
+           xmlns:h="http://java.sun.com/jsf/html"
+           xmlns:f="http://java.sun.com/jsf/core"
+           xmlns:ui="http://java.sun.com/jsf/facelets"
+           template="/WEB-INF/template/template1.xhtml">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <h:outputStylesheet name="css/componentsize.css"/>
+    </h:head>
+
+    <h:body style="width: 100%; margin: 0px; background:#efefef">
+        <div id="dheader">
+            <ui:include src="/WEB-INF/template/menuBarCommon.xhtml"></ui:include>
+        </div>
+
+        <div id="dcontent">
+            <table width="90%" align="center" border="1px;" style="height: 500px;">
+                <tr>
+                    <td width="20%">
+                        <p:panel style="background-color: #b4284b; width: 20%; height: 200px;
+                                 padding: 15px;">
+                            
+                        </p:panel>
+                    </td>
+                    <td width="70%" style="border: 1 px solid; border-color: black;">                          
+                
+                        <p:panel style="background-color: #b4284b; width: 50%; height: 200px;
+                                 overflow: auto; float: top; margin-top: 20px;">
+                            
+                        </p:panel>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="dfooter" style="text-align: center">
+            <ui:include src="/WEB-INF/template/footer.xhtml"></ui:include>
+        </div>
+    </h:body>
+
+
+
+
+
+
+
+</html>

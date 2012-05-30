@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>İs İhale Platformu</title>
+
+        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
+
+    </h:head>
+
+    <h:body>      
+        <h:form id="form">  
+
+            <p:growl id="msgs" showDetail="true"/>  
+
+            <p:panel header="Double Combo" style="margin-bottom:10px;">  
+                <h:panelGrid columns="2" cellpadding="5">  
+                    <p:selectOneMenu id="city" value="#{pprBean.city}">  
+                        <f:selectItem itemLabel="Select City" itemValue="" />  
+                        <f:selectItems value="#{pprBean.cities}" />  
+                        <p:ajax update="suburbs"  
+                                listener="#{pprBean.handleCityChange}" />  
+                    </p:selectOneMenu>  
+
+                    <p:selectOneMenu id="suburbs" value="#{pprBean.suburb}">                         
+                        <f:selectItem itemLabel="secim yapın" itemValue="" />  
+                        <f:selectItems value="#{pprBean.suburbs}" var="sbrb" /> 
+                        <f:converter converterId="converter"></f:converter>
+                    </p:selectOneMenu>  
+                </h:panelGrid>  
+
+                <p:separator />  
+
+                <p:commandButton value="Submit" update="msgs" actionListener="#{pprBean.displayLocation}" id="btnSubmit"/>  
+
+            </p:panel>  
+
+        </h:form> 
+    </h:body>
+</html>
+
+
+

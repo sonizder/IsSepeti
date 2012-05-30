@@ -4,218 +4,210 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 template="/WEB-INF/template/template1.xhtml">
 
-    <h:head>
-        <title>İs İhale Platformu</title>
+    <ui:define name="leftcenter">
 
-        <link type="text/css" rel="stylesheet" href="resource/css/componentsize.css"></link>
+        <div style="margin: 50px;" >
+        <h:form id="form">
+            <p:growl id="growl" sticky="true" showDetail="true"/>
 
-    </h:head>
+            <p:wizard widgetVar="wiz" style="width: 80%;"
+                      flowListener="#{advertWizard.onFlowProcess}">
 
-    <h:body>      
-        <ui:composition template="template/template1.xhtml">
+                <p:tab id="personal" title="İş Bilgileri" >
+                    <p:panel header="İşin Tanımı" style="background-color:#efefef;" rendered="#{advertWizard.wizardStep == 1}">
+                        <h:messages errorClass="error"/>
 
-            <ui:define name="leftcenter">
-
-                <h:form id="form" style="margin: 5px;" >
-                    <p:growl id="growl" sticky="true" showDetail="true"/>
-
-                    <p:wizard widgetVar="wiz" style="width: 80%;"
-                              flowListener="#{advertWizard.onFlowProcess}">
-
-                        <p:tab id="personal" title="İş Bilgileri">
-                            <p:panel header="İşin Tanımı" style="background-color:#efefef;">
-                                <h:messages errorClass="error"/>
-
-                                <h:panelGrid columns="3" columnClasses="label, value">
-                                    <h:outputText value="İşin Tanımı: *" />
-                                    <p:inputText required="true" id="istanimi"
-                                                 value="#{advertWizard.advert.isTanimi}" style="width: 226px"/>
-                                    <p:tooltip for="istanimi" style="background-color :#f96464"
-                                               value="İş ile ilgili iki kısa bir tanım yapın" showEffect="clip" hideEffect="explode" />  
-
-                                    <h:outputText value="İşin Açıklaması: *" />
-                                    <p:inputTextarea id="isaciklama" rows="5" cols="30"  maxlength="100" value="#{advertWizard.advert.isAciklamasi}"      
-                                                     autoResize="false"/>
-                                    <p:tooltip for="isaciklama" style="background-color :#f96464"
-                                               value="İş ile ilgili açıklama  yapın" showEffect="clip" hideEffect="explode" />  
-
-                                    <h:outputLabel value="İş Alanı: " for="isalani" />  
-                                    <p:autoComplete id="isalani" forceSelection="true" style="width: 226px"   
-                                                    value="#{advertWizard.advert.isAlani}"   
-                                                    completeMethod="#{advertComplate.complete}"/>
-                                    <p:tooltip for="isalani" style="background-color :#f96464"
-                                               value="İş Alanı" showEffect="clip" hideEffect="explode" />  
-
-
-                                    <h:outputLabel value="Malzemeniz Varmı?:" for="malzeme" />  
-                                    <p:autoComplete id="malzeme" forceSelection="true"   style="width: 226px"
-                                                    value="#{advertWizard.advert.malzeme}"   
-                                                    completeMethod="#{advertComplate.malzemeComplete}"/>
-                                    <p:tooltip for="malzeme" style="background-color :#f96464"
-                                               value="Malzemeyi siz mi ayarlayacaksınız?" showEffect="clip" hideEffect="explode" />  
-
-                                    <h:outputText value="Skip to last: " />
-                                    <h:selectBooleanCheckbox value="#{advertWizard.skip}" />
-                                </h:panelGrid>
-                            </p:panel>
-                        </p:tab>
+                        <h:panelGrid columns="3" columnClasses="label, value">
 
 
 
-                        <p:tab id="address" title="Adres">
-                            <p:panel header="Adres Bilgileri" style="background-color:#efefef;">
+                            <h:outputText value="İşin Tanımı: *" />
+                            <p:inputText required="true" id="istanimi"
+                                         value="#{advertWizard.advert.isTanimi}" style="width: 226px"/>
+                            <p:tooltip for="istanimi" style="background-color :#f96464"
+                                       value="İş ile ilgili iki kısa bir tanım yapın" showEffect="clip" hideEffect="explode" />  
 
-                                <h:messages errorClass="error"/>
+                            <h:outputText value="İşin Açıklaması: *" />
+                            <p:inputTextarea id="isaciklama" rows="5" cols="30"  maxlength="100" value="#{advertWizard.advert.isAciklamasi}"      
+                                             autoResize="false"/>
+                            <p:tooltip for="isaciklama" style="background-color :#f96464"
+                                       value="İş ile ilgili açıklama  yapın" showEffect="clip" hideEffect="explode" />  
 
-                                <h:panelGrid columns="3" columnClasses="label, value">
+                            <h:outputLabel value="İş Alanı: " for="isalani" />  
+                            <p:autoComplete id="isalani" forceSelection="true" style="width: 226px"   
+                                            value="#{advertWizard.advert.isAlani}"   
+                                            completeMethod="#{advertComplate.complete}"/>
+                            <p:tooltip for="isalani" style="background-color :#f96464"
+                                       value="İş Alanı" showEffect="clip" hideEffect="explode" />  
 
-                                    <h:outputLabel value="Şehir:" for="sehir" />  
-                                    <p:autoComplete id="sehir" forceSelection="true"   
-                                                    value="#{advertWizard.advert.sehir}"   
-                                                    completeMethod="#{advertComplate.sehirComplate}"/>
-                                    <p:tooltip for="sehir" style="background-color :#f96464"
-                                               value="Yaşadığınız şehir?" showEffect="clip" hideEffect="explode" />  
 
-                                    <h:outputText value="Il : " />
-                                    <p:inputText value="#{advertWizard.advert.il}" required="true" id="il" />
-                                    <p:tooltip for="il" style="background-color :#f96464"
-                                               value="Yaşadığınız il?" showEffect="clip" hideEffect="explode" />  
+                            <h:outputLabel value="Malzemeniz Varmı?:" for="malzeme" />  
+                            <p:autoComplete id="malzeme" forceSelection="true"   style="width: 226px"
+                                            value="#{advertWizard.advert.malzeme}"   
+                                            completeMethod="#{advertComplate.malzemeComplete}"/>
+                            <p:tooltip for="malzeme" style="background-color :#f96464"
+                                       value="Malzemeyi siz mi ayarlayacaksınız?" showEffect="clip" hideEffect="explode" />  
 
-                                    <h:outputText value="Açık Adres: " />
-                                    <p:inputText value="#{advertWizard.advert.acikAdres}" id="acikadres" />
-                                    <p:tooltip for="acikadres" style="background-color :#f96464"
-                                               value=" Size ulaşabileceğimiz adresiniz?" showEffect="clip" hideEffect="explode" />  
-
-                                    <h:outputText value="Yayın Süresi: " />
-                                    <p:calendar locale="tr" showButtonPanel="true" navigator="true" id="trCal" 
-                                                value="#{advertWizard.advert.yayinSuresi}"/> 
-                                    <p:tooltip for="trCal" style="background-color :#f96464"
-                                               value="Ne kadar süre yayında kalmasını istiyorsunuz?" showEffect="clip" hideEffect="explode" />  
-
-                                    <h:outputText value="Bütçeniz (TL ): " />
-                                    <p:keyboard value="#{advertWizard.advert.butce}" keypadOnly="true" id="butce"/>
-                                    <p:tooltip for="butce" style="background-color :#f96464"
-                                               value="İş için belirlediğiniz bütçeniz?" showEffect="clip" hideEffect="explode" />
-
-                                    <h:outputText value="Skip to last: " />
-                                    <h:selectBooleanCheckbox value="#{skip}" />
-                                </h:panelGrid>
-                            </p:panel>
-                        </p:tab>
+                            <h:outputText value="Skip to last: " />
+                            <h:selectBooleanCheckbox value="#{advertWizard.skip}" />
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
 
 
 
-                        <p:tab id="contact" title="Contact">
-                            <p:panel header="Contact Information" style="background-color:#efefef;">
+                <p:tab id="address" title="Adres">
+                    <p:panel header="Adres Bilgileri" style="background-color:#efefef;" rendered="#{advertWizard.wizardStep == 2}">
+                        <h:messages errorClass="error"/>
+                        <h:panelGrid columns="3" columnClasses="label, value">
 
-                                <h:messages errorClass="error"/>
+                            <h:outputText value="Şehir:"/> 
+                            <p:selectOneMenu id="cityyy" value="#{advertWizard.advert.sehir}">  
+                                <f:selectItem itemLabel="Select City" itemValue="" />  
+                                <f:selectItems value="#{citysAndSub.cities}" />  
+                                <p:ajax update="suburbs"  
+                                        listener="#{advertWizard.handleCityChange}" />  
+                            </p:selectOneMenu>  
+                            <p:tooltip for="cityyy" style="background-color :#f96464"
+                                       value="Yaşadığınız şehir?" showEffect="clip" hideEffect="explode" />
 
-                                <h:panelGrid columns="2" columnClasses="label, value">
-                                    <h:outputText value="BU SAYFADA Kİ HERŞEY  : " style="color: red; font-size: 16px;"/>
-                                    <h:outputText value="KISA BİR SÜRELİĞİNE ÜCRETSİZ!!! : " style="color: red; font-size: 16px;"/>
+                            <h:outputText value="Ilçe : " />
+                            <p:selectOneMenu id="suburbs" value="#{advertWizard.advert.il}" var="ssdd">                         
+                                <f:selectItem itemLabel="secim yapın" itemValue="" />  
+                                <f:selectItems value="#{advertWizard.suburbsss}" /> 
+                            </p:selectOneMenu> 
+                            <p:tooltip for="suburbs" style="background-color :#f96464"
+                                       value="Yaşadığınız il?" showEffect="clip" hideEffect="explode" />
 
+                            <h:outputText value="Açık Adres: " />
+                            <p:inputText value="#{advertWizard.advert.acikAdres}" id="acikadres" />
+                            <p:tooltip for="acikadres" style="background-color :#f96464"
+                                       value=" Size ulaşabileceğimiz adresiniz?" showEffect="clip" hideEffect="explode" />  
 
-                                    <h:outputText value="Ana Vitrine Ekle (30 Tl): " />  
-                                    <p:selectBooleanCheckbox value="#{advertWizard.advert.anaVitrin}" disabled="false" />
+                            <h:outputText value="Yayın Süresi: " />
+                            <p:calendar locale="tr" showButtonPanel="true" navigator="true" id="trCal" 
+                                        value="#{advertWizard.advert.yayinSuresi}"/> 
+                            <p:tooltip for="trCal" style="background-color :#f96464"
+                                       value="Ne kadar süre yayında kalmasını istiyorsunuz?" showEffect="clip" hideEffect="explode" />  
 
-                                    <h:outputText value="Sektorel Vitrine Ekle (10 Tl): " />  
-                                    <p:selectBooleanCheckbox value="#{advertWizard.advert.sektorelVitrin}" disabled="true"/>
+                            <h:outputText value="Bütçeniz (TL ): " />
+                            <p:keyboard value="#{advertWizard.advert.butce}" keypadOnly="true" id="butce"/>
+                            <p:tooltip for="butce" style="background-color :#f96464"
+                                       value="İş için belirlediğiniz bütçeniz?" showEffect="clip" hideEffect="explode" />
 
-                                    <h:outputText value="Kuralları Okudum.! " />  
-                                    <p:selectBooleanCheckbox   required="true" id="onay">
-                                    </p:selectBooleanCheckbox>
-                                    <p:tooltip for="onay" style="background-color :#f96464"
-                                               value="Kuralları okuduğunuzu ve kabul ettiğinizi belirtin?" showEffect="clip" hideEffect="explode" />
-
-
-
-                                    <h:outputText value="Ek Bilgi : " />
-                                    <p:inputText value="#{advertWizard.advert.ekBilgi}"/>
-
-                                </h:panelGrid>
-
-                            </p:panel>
-                        </p:tab>
-
-                        <p:tab id="confirm" title="Doğrulama">
-                            <p:panel header="Onaylama" style="background-color:#efefef;">
-
-                                <h:panelGrid id="confirmation" columns="6">
-                                    <h:outputText value="İşin Tanımı : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.isTanimi}" />
-
-                                    <h:outputText value="İşin Açıklaması : " style="color: blue"/>
-                                    <h:outputText  styleClass="outputLabel"
-                                                   value="#{advertWizard.advert.isAciklamasi}"/>
-
-                                    <h:outputText value="İş Alanı : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.isAlani}" />
-
-                                    <h:outputText value="Malzeme : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.malzeme}" />
+                            <h:outputText value="Skip to last: " />
+                            <h:selectBooleanCheckbox value="#{skip}" />
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
 
 
 
-                                    <h:outputText value="Şehir : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.sehir}" />
+                <p:tab id="contact" title="Contact">
+                    <p:panel header="Contact Information" style="background-color:#efefef;">
 
-                                    <h:outputText value="İl : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.il}" />
+                        <h:messages errorClass="error"/>
 
-                                    <h:outputText value="Açık Adres : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.acikAdres}" />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="BU SAYFADA Kİ HERŞEY  : " style="color: red; font-size: 16px;"/>
+                            <h:outputText value="KISA BİR SÜRELİĞİNE ÜCRETSİZ!!! : " style="color: red; font-size: 16px;"/>
 
 
-                                    <h:outputText value="Yayın Suresi : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.yayinSuresi}" />
+                            <h:outputText value="Ana Vitrine Ekle (30 Tl): " />  
+                            <p:selectBooleanCheckbox value="#{advertWizard.advert.anaVitrin}" disabled="false" />
 
-                                    <h:outputText value="Bütçe : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.butce}" />
+                            <h:outputText value="Sektorel Vitrine Ekle (10 Tl): " />  
+                            <p:selectBooleanCheckbox value="#{advertWizard.advert.sektorelVitrin}" disabled="true"/>
 
-                                    <h:outputText value="Ana Vitrin : " style="color: blue"/>
-                                    <h:outputText value="Ücretsiz : " style="color: red; font-size: 16px"/>
-
-                                    <h:outputText value="Sektörel Vitrin : " style="color: blue"/>
-                                    <h:outputText value="Ücretsiz : " style="color: red; font-size: 16px"/>        
+                            <h:outputText value="Kuralları Okudum.! " />  
+                            <p:selectBooleanCheckbox   required="true" id="onay">
+                            </p:selectBooleanCheckbox>
+                            <p:tooltip for="onay" style="background-color :#f96464"
+                                       value="Kuralları okuduğunuzu ve kabul ettiğinizi belirtin?" showEffect="clip" hideEffect="explode" />
 
 
-                                    <h:outputText value="Ek Bilgi : " style="color: blue"/>
-                                    <h:outputText styleClass="outputLabel"
-                                                  value="#{advertWizard.advert.ekBilgi}" />
 
-                                    <h:outputText />
-                                    <h:outputText />
-                                </h:panelGrid>
+                            <h:outputText value="Ek Bilgi : " />
+                            <p:inputText value="#{advertWizard.advert.ekBilgi}"/>
 
-                                <p:commandButton value="Kaydet" update="growl" 
-                                                 actionListener="#{advertWizard.save}"></p:commandButton>
+                        </h:panelGrid>
 
-                            </p:panel>
-                        </p:tab>
-                    </p:wizard>
+                    </p:panel>
+                </p:tab>
 
-                </h:form>
-                
-                <h:form>
-                    <p:commandButton value="session oku" actionListener="#{advertsShowModel.showCase}"></p:commandButton>
-                </h:form>
+                <p:tab id="confirm" title="Doğrulama">
+                    <p:panel header="Onaylama" style="background-color:#efefef;">
+
+                        <h:panelGrid id="confirmation" columns="6">
+                            <h:outputText value="İşin Tanımı : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.isTanimi}" />
+
+                            <h:outputText value="İşin Açıklaması : " style="color: blue"/>
+                            <h:outputText  styleClass="outputLabel"
+                                           value="#{advertWizard.advert.isAciklamasi}"/>
+
+                            <h:outputText value="İş Alanı : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.isAlani}" />
+
+                            <h:outputText value="Malzeme : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.malzeme}" />
 
 
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</html>
+
+                            <h:outputText value="Şehir : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.sehir}" />
+
+                            <h:outputText value="İl : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.il}" />
+
+                            <h:outputText value="Açık Adres : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.acikAdres}" />
+
+
+                            <h:outputText value="Yayın Suresi : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.yayinSuresi}" />
+
+                            <h:outputText value="Bütçe : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.butce}" />
+
+                            <h:outputText value="Ana Vitrin : " style="color: blue"/>
+                            <h:outputText value="Ücretsiz : " style="color: red; font-size: 16px"/>
+
+                            <h:outputText value="Sektörel Vitrin : " style="color: blue"/>
+                            <h:outputText value="Ücretsiz : " style="color: red; font-size: 16px"/>        
+
+
+                            <h:outputText value="Ek Bilgi : " style="color: blue"/>
+                            <h:outputText styleClass="outputLabel"
+                                          value="#{advertWizard.advert.ekBilgi}" />
+
+                            <h:outputText />
+                            <h:outputText />
+                        </h:panelGrid>
+
+                        <p:commandButton value="Kaydet" update="growl" process="@this"
+                                         actionListener="#{advertWizard.save}"></p:commandButton>
+
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+        </h:form>
+            </div>
+    </ui:define>
+</ui:composition>
+
